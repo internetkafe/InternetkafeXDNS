@@ -1,0 +1,134 @@
+{
+  "log": {
+    "loglevel": "info"
+  },
+  "dns": {
+    "servers": [
+      {
+        "address": "fakedns",
+        "domains": [
+          "all"
+        ]
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "tag": "internetKafeXDNS",
+      "port": 13868,
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "encryption": "none"
+      },
+      "sniffing": {
+        "enabled": false,
+        "routeOnly": false,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic",
+          "fakedns"
+        ],
+        "metadataOnly": false
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "finalmask": {
+          "udp": [
+            {
+              "type": "xdns",
+              "settings": {
+                "domain": "77.88.8.8"
+              }
+            }
+          ]
+        },
+        "tcpSettings": {
+          "header": {
+            "type": "none"
+          },
+          "acceptProxyProtocol": false
+        },
+        "realitySettings": {
+          "show": false,
+          "xver": 0,
+          "target": "amd.com:443",
+          "shortIds": [
+            "e852dc",
+            "ead36c6a1806",
+            "7e18",
+            "43309443e8",
+            "2b",
+            "0a31a96b3408cd",
+            "2f65ac8df70e2238",
+            "9187a05e"
+          ],
+          "privateKey": "CMXKnk4l9fGu9leO7Yx0N8iEZO1Zarn3BpeAXR9hXX0",
+          "maxTimediff": 0,
+          "mldsa65Seed": "",
+          "serverNames": [
+            "amd.com"
+          ],
+          "maxClientVer": "",
+          "minClientVer": ""
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole"
+    },
+    {
+      "tag": "fakedns",
+      "protocol": "dns",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "ip": [
+          "198.18.0.0/15"
+        ],
+        "type": "field",
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "protocol": [
+          "bittorrent"
+        ],
+        "outboundTag": "block"
+      }
+    ],
+    "domainStrategy": "IPIfNonMatch"
+  },
+  "policy": {
+    "levels": {
+      "0": {
+        "connIdle": 300,
+        "handshake": 4,
+        "bufferSize": 512,
+        "uplinkOnly": 5,
+        "downlinkOnly": 30
+      }
+    },
+    "system": {
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
+    }
+  }
+}
