@@ -5,7 +5,7 @@
   "dns": {
     "servers": [
       {
-        "address": "fakedns",
+        "address": "tls://dns.quad9.net",
         "domains": [
           "all"
         ]
@@ -29,8 +29,7 @@
         "destOverride": [
           "http",
           "tls",
-          "quic",
-          "fakedns"
+          "quic"
         ],
         "metadataOnly": false
       },
@@ -90,22 +89,10 @@
     {
       "tag": "block",
       "protocol": "blackhole"
-    },
-    {
-      "tag": "fakedns",
-      "protocol": "dns",
-      "settings": {}
     }
   ],
   "routing": {
     "rules": [
-      {
-        "ip": [
-          "198.18.0.0/15"
-        ],
-        "type": "field",
-        "outboundTag": "direct"
-      },
       {
         "type": "field",
         "protocol": [
