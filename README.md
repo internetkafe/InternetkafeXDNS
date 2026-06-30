@@ -1,6 +1,5 @@
 # 🍵 InternetkafeXDNS – Xray конфиг для remnawave с подменой DNS через реальный TLS‑трафик
 
-https://t.me/inetkafe
 
 
 
